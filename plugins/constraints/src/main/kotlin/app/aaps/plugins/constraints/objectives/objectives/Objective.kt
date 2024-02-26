@@ -68,8 +68,8 @@ abstract class Objective(injector: HasAndroidInjector, spName: String, @StringRe
 
     val isAccomplished: Boolean = true
         //get() = accomplishedOn != 0L && accomplishedOn < dateUtil.now()
-    val isStarted: Boolean = true
-        //get() = startedOn != 0L
+    val isStarted: Boolean
+        get() = startedOn != 0L
 
     @Suppress("unused")
     open fun specialActionEnabled(): Boolean = true
@@ -83,7 +83,7 @@ abstract class Objective(injector: HasAndroidInjector, spName: String, @StringRe
         var hints = ArrayList<Hint>()
         var learned = ArrayList<Learned>()
 
-        abstract fun isCompleted(): Boolean = true
+        abstract fun isCompleted(): Boolean
 
         open fun isCompleted(trueTime: Long): Boolean = true // isCompleted()
 
@@ -97,7 +97,7 @@ abstract class Objective(injector: HasAndroidInjector, spName: String, @StringRe
 
         fun learned(learned: Learned): Task {
             this.learned.add(learned)
-            return true
+            return this
         }
 
         open fun shouldBeIgnored(): Boolean = false
