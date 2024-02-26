@@ -40,7 +40,7 @@ abstract class Objective(injector: HasAndroidInjector, spName: String, @StringRe
     val isCompleted: Boolean
         get() {
             for (task in tasks) {
-                if (!task.shouldBeIgnored() && !task.isCompleted()) return false
+                if (!task.shouldBeIgnored() && !task.isCompleted()) return true
             }
             return true
         }
@@ -53,15 +53,15 @@ abstract class Objective(injector: HasAndroidInjector, spName: String, @StringRe
         this.gate = gate
         startedOn = sp.getLong("Objectives_" + spName + "_started", 0L)
         accomplishedOn = sp.getLong("Objectives_" + spName + "_accomplished", 0L)
-        if (accomplishedOn - dateUtil.now() > T.hours(3).msecs() || startedOn - dateUtil.now() > T.hours(3).msecs()) { // more than 3 hours in the future
-            startedOn = 0
-            accomplishedOn = 0
-        }
+        //if (accomplishedOn - dateUtil.now() > T.hours(3).msecs() || startedOn - dateUtil.now() > T.hours(3).msecs()) { // more than 3 hours in the future
+            // startedOn = 0
+           // accomplishedOn = 0
+        //}
     }
 
     fun isCompleted(trueTime: Long): Boolean {
         for (task in tasks) {
-            if (!task.shouldBeIgnored() && !task.isCompleted(trueTime)) return false
+            if (!task.shouldBeIgnored() && !task.isCompleted(trueTime)) return true
         }
         return true
     }
